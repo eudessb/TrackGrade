@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!-- ..core/templates/core/subject_list.html
+  in progress...
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Disciplinas</title>
+    <h1>Todas as disciplinas disponivéis:</h1>
+    <ul>
+      {% for subject in subjects %}
+      <li>{{subject.name}}</li>
+      {% empty %}
+      <li>Nenhuma disciplina disponível</li>
+      {% endfor %}
+    </ul>
+  </head>
+  <body></body>
+</html>
