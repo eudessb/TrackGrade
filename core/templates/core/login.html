@@ -1,0 +1,38 @@
+{% extends 'core/home.html' %}
+
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<h2 class="d-flex justify-content-center ">Login</h2>
+<div class=" d-flex justify-content-center  ">
+
+    <form style="max-width: 500px;" method="post">
+        {% csrf_token %}
+
+        {% for error in form.non_field_errors %}
+        <div class="alert alert-danger p-2 m-1">{{ error }}</div>
+        {% endfor %}
+
+        <div class="mb-3 ">
+            <label for="{{form.username.id_for_label}}">Email:</label>
+            {{form.username|add_class:"nameinput form-control"}}
+            <div class="text-danger"> {{form.username.errors}} </div>
+        </div>
+        <div class="mb-3 ">
+            <label for="{{form.password.id_for_label}}">Senha:</label>
+            {{form.password|add_class:"passwordinput form-control"|attr:"placeholder=Digite sua senha"}}
+            <div class="text-danger"> {{form.password.errors}} </div>
+
+        </div>
+        <button type="submit" class="btn btn-primary "> Entrar</button>
+        <button type="reset" class="btn  btn-secondary "> Limpar</button>
+        <a class="btn btn-link " href="{% url 'user_register'%}">Não possui uma conta?, Cadastre-se.</a>
+
+    </form>
+</div>
+
+{% endblock %}
