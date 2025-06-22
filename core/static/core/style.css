@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(249, 246, 238);
+}
+/*
+h1 {
+  color: black;
+  font-size: x-large;
+  align-self: center;
+  font-weight: bolder;
+
+  background-image: "";
+
+}
+    */
+
+.labelcss {
+  font-size: large;
+  font-weight: bold;
+  color: rgb(0, 71, 171);
+}
+.labelcss::placeholder {
+  font-size: smaller;
+}
+.nameinput {
+  max-width: 450px;
+  width: 350px;
+  border: solid 1px;
+  border-radius: 10px;
+  color: black;
+}
+.passwordinput {
+  max-width: 250px;
+  border: solid 1px;
+  border-radius: 10px;
+}
+.codeinput {
+  max-width: 90px;
+  border: solid 1px;
+  border-radius: 10px;
+  color: black;
+}
+
+div.div1 {
+  font-size: 20px;
+  font-weight: normal;
+  color: black;
+  box-sizing: border-box;
+  background-color: rgba(0, 20, blue, 0.8);
+  align-items: center;
+}
+
+#admli {
+  align-self: flex-end;
+}
+.formid {
+  border: 2px solid black;
+  border-radius: 10px;
+}
+.button {
+  padding: 8px;
+  border-radius: 5px;
+  background-color: lightgray;
+  text-decoration: solid;
+  border-color: black;
+  border-width: 3px;
+}
