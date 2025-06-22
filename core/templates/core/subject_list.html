@@ -1,19 +1,65 @@
-<!DOCTYPE html>
-<!-- ..core/templates/core/subject_list.html
-  in progress...
--->
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Disciplinas</title>
-    <h1>Todas as disciplinas disponivéis:</h1>
-    <ul>
-      {% for subject in subjects %}
-      <li>{{subject.name}}</li>
-      {% empty %}
-      <li>Nenhuma disciplina disponível</li>
-      {% endfor %}
-    </ul>
-  </head>
-  <body></body>
-</html>
+{% extends 'core/dashboard.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load form_extras %}
+
+{% block title %}Suas disciplinas{% endblock %}
+{% block content %}
+
+{% if disciplinas %}
+<h2 class="d-flex justify-content-center">Suas disciplinas</h2>
+<table class="table table-striped mx-auto" style="width: 500px;">
+  <thead>
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Código</th>
+      <th scope="col">Semestre</th>
+      <th scope="col">Remover</th>
+      <th scope="col">Notas</th>
+      <th scope="col">Ver notas</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for disciplina in disciplinas %}
+    <tr>
+      <td>{{ disciplina.name }}</td>
+      <td>{{ disciplina.codigo }}</td>
+      <td>{{ disciplina.semestre }}</td>
+      <td>
+        <form action="{% url 'subject_remove' disciplina.id %}"
+          onsubmit="return confirm('Tem certeza que deseja remover esta disciplina?');" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-sm">
+            <span class="bi bi-trash"></span>
+          </button>
+        </form>
+      </td>
+      <td>
+        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+          data-bs-target="#notaModal-{{ disciplina.id }}">
+          <span class="bi  bi-pencil "></span>
+        </button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
+          data-bs-target="#notasModal-{{ disciplina.id }}">
+          <span class="bi  bi-eye "></span>
+        </button>
+      </td>
+    </tr>
+    {% include "core/grade_modal.html" with form=formularios|get_item:disciplina.id %}
+    {% include "core/grades_info_modal.html" with disciplina=disciplina %}
+
+    {% endfor %}
+  </tbody>
+</table>
+
+{% else %}
+<div class="mb-3">
+  <h3 class="d-flex justify-content-center" style="color:black">Nenhuma disciplina disponível</h3>
+  <a style="font-size: x-large;" class="d-flex justify-content-center btn btn-link"
+    href="{% url 'subject_register' %}">Cadastre uma disciplina!</a>
+</div>
+{% endif %}
+
+{% endblock %}
